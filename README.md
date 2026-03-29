@@ -7,12 +7,11 @@ Most AI agent content is written by people who deployed one bot last Tuesday. Th
 Over 44 days, I logged every failure, traced every root cause, and wrote down every fix. The result is this guide.
 
 ```
-Incidents Logged:    127
-Root Cause Categories: 10
-Sessions Mined:      383
-Agents in Fleet:      34
-Uptime Target:       99%
-Actual Uptime:       91.3%
+Incidents Logged:      127
+Root Cause Categories:   9
+Sessions Mined:        383
+Agents in Fleet:        34
+Days in Production:     44
 ```
 
 The numbers are real. The war stories are real. The client names and identifying details are anonymized.
@@ -23,13 +22,12 @@ The numbers are real. The war stories are real. The client names and identifying
 
 The incidents that made me question my life choices, roughly in order of severity:
 
-- A bot created **200 duplicate email drafts** in one night. The client inbox looked like a ransom note.
-- An agent confidently sent a session recap **to the wrong client**. With the other client's name still in the greeting.
-- Token refresh failed silently for 11 days. Eleven. Days. Nobody noticed because the bot just stopped working and nothing alerted.
-- An **$84/month mystery charge** surfaced during a cost audit. Still unsure which agent ordered it. The investigation is in Chapter 9.
-- One bot hallucinated a follow-up task that didn't exist, then emailed the client about it. The client responded asking what we were talking about.
-- Disk hit 100% on the VPS. Every container crashed. Root cause: a logging bot that never learned the word "rotate."
-- An agent applied the wrong client's brand voice to a deliverable. Very professional. Very wrong company.
+- A bot created **200 duplicate email drafts** over a few days because a broken symlink made it forget what it had already done. Every 30-minute cycle, it started from scratch. 87 drafts in a single day.
+- An agent drafted a session recap **with the wrong client's name in the greeting.** Date-only matching beat name matching in the transcript lookup. The wrong transcript won.
+- A critical system component broke and **stayed broken for 30 days** before anyone noticed. It ran every day. It logged "success" every day. Its output was blank every day.
+- An **$84 API charge** surfaced during a cost audit. Five bots were still calling the old API after a migration because they were in utility files nobody checked.
+- Disk hit 97% on the VPS. Containers started failing. Root cause: a backup process that never learned the word "rotate."
+- Docker containers got rebuilt, IPs changed, and **six scripts broke simultaneously** because every one of them had hardcoded container addresses.
 
 If none of these sound familiar, you probably haven't shipped agents to production yet. Give it a week.
 
